@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">bakingapp</string>
+    <string name="app_name">Baking App</string>
+    <string name="all_recipes_loaded">All Recipes Loaded</string>
+    <string name="connection_error_message">Ooops! \nSomething went wrong... \nTry later</string>
 </resources>
