@@ -2,4 +2,9 @@
     <string name="app_name">Baking App</string>
     <string name="all_recipes_loaded">All Recipes Loaded</string>
     <string name="connection_error_message">Ooops! \nSomething went wrong... \nTry later</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="recipe_name">Nutella Pie</string>
+    <string name="next_step">Next Step</string>
+    <string name="previous_step">Previous Step</string>
+    <string name="step_description">Step description</string>
 </resources>

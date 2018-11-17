@@ -27,7 +27,7 @@
                 android:id="@+id/recipe_iv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/brownies"
+                android:src="@drawable/nutellapie"
                 android:scaleType="centerCrop" />
 
             <RelativeLayout
@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/recipe_name_tv"
                     android:textSize="30dp"
-                    tools:text="Brownies"
+                    tools:text="@string/recipe_name"
                     android:layout_centerHorizontal="true"
                     android:background="@android:color/transparent"
                     android:backgroundTint="@color/colorAccent"
