@@ -4,6 +4,8 @@ public interface BakingAppConstants {
 
     String RECIPE = "recipe";
 
+    String STEP= "Step";
+
     String RECIPE_LIST = "recipe_list";
 
     String ALL_RECIPES_LOADED = "All Recipes";
@@ -15,4 +17,8 @@ public interface BakingAppConstants {
     String BROWNIES = "Brownies";
 
     String CHEESECAKE = "Cheesecake";
+
+    String STEP_N = "Step n° ";
+
+    String TWO_PANE = "twoPane";
 }

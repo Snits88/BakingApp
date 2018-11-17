@@ -7,4 +7,6 @@
     <string name="next_step">Next Step</string>
     <string name="previous_step">Previous Step</string>
     <string name="step_description">Step description</string>
+    <string name="no_content_description">No Content</string>
+    <string name="no_content_title">Let Cook!</string>
 </resources>

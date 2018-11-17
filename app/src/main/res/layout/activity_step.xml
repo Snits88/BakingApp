@@ -8,65 +8,9 @@
     android:orientation="vertical"
     tools:context="com.android.udacity.project.bakingapp.StepActivity">
 
-    <android.support.constraint.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/recipe_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:textSize="40sp"
-            android:textAlignment="center"
-            android:textStyle="italic"
-            tools:text="Title" />
-
-        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
-            android:id="@+id/playerView"
-            android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="10dp"
-            app:layout_constraintTop_toBottomOf="@id/recipe_detail"/>
-
-        <TextView
-            android:id="@+id/recipe_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:textSize="25sp"
-            android:textAlignment="center"
-            tools:text="Description"
-            app:layout_constraintTop_toBottomOf="@id/playerView"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="16dp"
-            app:layout_constraintTop_toBottomOf="@id/recipe_description">
-
-            <Button
-                android:id="@+id/previous_step_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:text="@string/previous_step"
-                android:visibility="invisible"
-                style="?android:attr/buttonBarButtonStyle" />
-
-            <Button
-                android:id="@+id/next_step_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:text="@string/next_step"
-                android:visibility="invisible"
-                style="?android:attr/buttonBarButtonStyle" />
-
-        </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:id="@+id/recipe_detail_container">
+    </FrameLayout>
 </ScrollView>

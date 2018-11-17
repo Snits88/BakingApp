@@ -42,17 +42,17 @@
             android:layout_marginVertical="10dp">
 
             <ScrollView
-                android:layout_width="450dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            </ScrollView>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_recipe_step"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginHorizontal="15dp" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview_recipe_step"
-                android:layout_width="450dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginHorizontal="15dp" />
+            </ScrollView>
         </RelativeLayout>
     </android.support.constraint.ConstraintLayout>
 
