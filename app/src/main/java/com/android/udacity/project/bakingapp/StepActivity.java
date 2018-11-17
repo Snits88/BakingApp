@@ -34,13 +34,13 @@ public class StepActivity extends AppCompatActivity {
             //Obtain Recipe and Step Selected from Intent
             this.clickedStep = getIntent().getExtras().getParcelable(BakingAppConstants.STEP);
             this.recipe = getIntent().getExtras().getParcelable(BakingAppConstants.RECIPE);
-        }
-        if(clickedStep != null){
-            // Specific Clicked Step in the passed Intent
-            startStepFragment();
-        }else{
-            // No Step in the passed Intenet
-            startIngredientesFragment();
+            if(clickedStep != null){
+                // Specific Clicked Step in the passed Intent
+                startStepFragment();
+            }else{
+                // No Step in the passed Intenet
+                startIngredientesFragment();
+            }
         }
     }
 

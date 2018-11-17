@@ -40,10 +40,25 @@ public class RecipeIngredientsFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(rIAdapter);
-        if(recipe.getIngredients()!= null){
+        if(recipe!=null && recipe.getIngredients()!= null){
             rIAdapter.setData(recipe.getIngredients());
         }
         return rootView;
     }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
 
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }
