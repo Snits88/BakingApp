@@ -11,7 +11,7 @@
         android:id="@+id/step_description"
         android:layout_marginHorizontal="15dp"
         android:layout_marginVertical="15dp"
-        android:background="@color/colorPrimaryAlternative"
+        android:background="@color/colorPrimary"
         android:paddingHorizontal="5dp"
         android:textSize="30sp"
         android:textStyle="bold"

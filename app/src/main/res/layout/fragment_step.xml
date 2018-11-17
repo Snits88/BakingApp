@@ -24,6 +24,14 @@
         android:layout_marginVertical="10dp"
         app:layout_constraintTop_toBottomOf="@id/recipe_title_detail"/>
 
+    <ImageView
+        android:id="@+id/image_playerView"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:background="@drawable/no_video"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/recipe_title_detail"/>
+
     <TextView
         android:id="@+id/recipe_step_description"
         android:layout_width="match_parent"
@@ -33,7 +41,7 @@
         android:textSize="25sp"
         android:textAlignment="center"
         tools:text="Description"
-        app:layout_constraintTop_toBottomOf="@id/playerView"/>
+        app:layout_constraintTop_toBottomOf="@id/image_playerView"/>
 
     <LinearLayout
         android:layout_width="match_parent"

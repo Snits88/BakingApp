@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ingredients_description_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="16dp">
+
+            <TextView
+                android:id="@+id/ingredients_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="@string/ingredient_description"
+                android:textColor="@color/colorBlack"
+                android:textSize="25sp"
+                style="?android:attr/buttonBarButtonStyle"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintTop_toBottomOf="@id/ingredients_description_layout">
+
+            <TextView
+                android:id="@+id/ingredients_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:text="@string/ingredient_quantity"
+                android:textColor="@color/colorBlack"
+                android:textSize="15sp"
+                style="?android:attr/buttonBarButtonStyle" />
+
+            <TextView
+                android:id="@+id/ingredients_measure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:text="@string/ingredient_measure"
+                android:textColor="@color/colorBlack"
+                android:textSize="15sp"
+                style="?android:attr/buttonBarButtonStyle" />
+        </LinearLayout>
+
+</RelativeLayout>

@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Button;
 
 import com.android.udacity.project.bakingapp.adapter.RecipeStepAdapter;
+import com.android.udacity.project.bakingapp.fragment.RecipeIngredientsFragment;
 import com.android.udacity.project.bakingapp.fragment.RecipeStepFragment;
 import com.android.udacity.project.bakingapp.model.Recipe;
 import com.android.udacity.project.bakingapp.model.Step;
@@ -43,10 +45,32 @@ public class RecipeInfoActivity extends AppCompatActivity implements RecipeStepA
         setContentView(R.layout.activity_recipe_list);
         ButterKnife.bind(this);
         this.recipe = getIntent().getExtras().getParcelable(BakingAppConstants.RECIPE);
+        //Check  if app is running on tablet or not
+        if (findViewById(R.id.recipe_detail_container) != null) {
+            mTwoPane = true;
+        }
         // Font for Title and Description
         am = this.getAssets();
         tf = Typeface.createFromAsset(am, "fonts/GarmentDistrict-Regular.otf");
         btnIngredients.setTypeface(tf);
+        btnIngredients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mTwoPane) {
+                    // Set Fragment with Ingredients Information
+                    RecipeIngredientsFragment fragmentIngredients = new RecipeIngredientsFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable(BakingAppConstants.RECIPE, recipe);
+                    fragmentIngredients.setArguments(bundle);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.recipe_detail_container, fragmentIngredients).commit();
+                }else{
+                    // Set Step Activity for Ingredients information
+                    Intent intent = new Intent(RecipeInfoActivity.this, StepActivity.class);
+                    intent.putExtra(BakingAppConstants.RECIPE, recipe);
+                    startActivity(intent);
+                }
+            }
+        });
         //Menage Adaper for Recipe Step Description
         rsAdapter = new RecipeStepAdapter(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -57,11 +81,6 @@ public class RecipeInfoActivity extends AppCompatActivity implements RecipeStepA
 
         // Set Recipe Step List for adapter
         if (recipe != null) {rsAdapter.setData(recipe.getSteps());}
-
-        //Check  if app is running on tablet or not
-        if (findViewById(R.id.recipe_detail_container) != null) {
-            mTwoPane = true;
-        }
     }
 
     @Override

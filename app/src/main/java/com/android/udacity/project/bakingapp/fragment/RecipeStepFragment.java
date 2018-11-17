@@ -1,8 +1,6 @@
 package com.android.udacity.project.bakingapp.fragment;
 
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.udacity.project.bakingapp.R;
@@ -23,8 +22,10 @@ import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -40,7 +41,9 @@ public class RecipeStepFragment extends Fragment {
     private Step clickedStep;
 
     private boolean mTwoPane;
+    private boolean videoPlay;
     private TextView title;
+    private ImageView imagePlayerView;
     private SimpleExoPlayerView playerView;
     private TextView description;
     private Button pBtnStep;
@@ -58,7 +61,7 @@ public class RecipeStepFragment extends Fragment {
         am = getContext().getAssets();
         tfDescription = Typeface.createFromAsset(am, "fonts/GarmentDistrict-Regular.otf");
         tfTitle = Typeface.createFromAsset(am, "fonts/GarmentDistrict-Regular.otf");
-        //Get Recipe and Selectd Step
+        //Get Recipe and Selected Step
         recipe = getArguments().getParcelable(BakingAppConstants.RECIPE);
         clickedStep = getArguments().getParcelable(BakingAppConstants.STEP);
         mTwoPane = getArguments().getBoolean(BakingAppConstants.TWO_PANE);
@@ -72,6 +75,7 @@ public class RecipeStepFragment extends Fragment {
         // Retrieve all View
         title = rootView.findViewById(R.id.recipe_title_detail);
         playerView = rootView.findViewById(R.id.playerView);
+        imagePlayerView = rootView.findViewById(R.id.image_playerView);
         description = rootView.findViewById(R.id.recipe_step_description);
         pBtnStep = rootView.findViewById(R.id.previous_step_btn);
         nBtnStep = rootView.findViewById(R.id.next_step_btn);
@@ -82,8 +86,13 @@ public class RecipeStepFragment extends Fragment {
             title.setText(clickedStep.getShortDescription());
         }
         // Populate Player
-        Bitmap icon = BitmapFactory.decodeResource(this.getResources(), R.drawable.no_video);
-        playerView.setDefaultArtwork(icon);
+        if(player != null){
+            videoPlay = true;
+            playerView.setPlayer(player);
+        }else{
+            imagePlayerView.setVisibility(View.VISIBLE);
+            playerView.setVisibility(View.INVISIBLE);
+        }
         // Populate Descritpion
         title.setTypeface(tfTitle);
         description.setText(getString(R.string.no_content_description));
@@ -99,8 +108,11 @@ public class RecipeStepFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        releasePlayer();
-
+        if (player != null) {
+            player.stop();
+            player.release();
+            player = null;
+        }
     }
 
 
@@ -113,15 +125,6 @@ public class RecipeStepFragment extends Fragment {
         }
     }
 
-    private void releasePlayer() {
-        if (player != null) {
-            player.stop();
-            player.release();
-            player = null;
-        }
-    }
-
-
     @Override
     public void onResume() {
         super.onResume();
@@ -133,11 +136,14 @@ public class RecipeStepFragment extends Fragment {
     }
 
     private void buildSimpleExoPlayer() {
+        videoPlay = false;
         if (clickedStep != null && !StringUtils.isEmpty(clickedStep.getVideoURL())) {
             if (player == null) {
-                player = ExoPlayerFactory.newSimpleInstance(getActivity(), new DefaultTrackSelector());
+                TrackSelector trackSelector = new DefaultTrackSelector();
+                player = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector);
             }
-            DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getActivity(), "");
+            String userAgent = Util.getUserAgent(getActivity(), getString(R.string.app_name));
+            DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getActivity(), userAgent);
             DefaultExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
             mediaSource = new ExtractorMediaSource(Uri.parse(clickedStep.getVideoURL()), dataSourceFactory, extractorsFactory, null, null);
             player.prepare(mediaSource);
@@ -158,6 +164,9 @@ public class RecipeStepFragment extends Fragment {
                 pBtnStep.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
+                        if(videoPlay){
+                            player.release();
+                        }
                         RecipeStepFragment nextFragment = new RecipeStepFragment();
                         Bundle bundle = new Bundle();
                         bundle.putParcelable(BakingAppConstants.RECIPE, recipe);
@@ -175,6 +184,9 @@ public class RecipeStepFragment extends Fragment {
                 nBtnStep.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
+                        if(videoPlay){
+                            player.release();
+                        }
                         RecipeStepFragment nextFragment = new RecipeStepFragment();
                         Bundle bundle = new Bundle();
                         bundle.putParcelable(BakingAppConstants.RECIPE, recipe);

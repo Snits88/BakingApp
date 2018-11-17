@@ -25,6 +25,7 @@
             tools:layout_constraintTop_creator="1"
             tools:layout_constraintLeft_creator="1"
             android:text="@string/ingredients"
+            android:textSize="40sp"
             tools:text="Ingredients" />
 
         <RelativeLayout

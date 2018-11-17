@@ -6,6 +6,9 @@
     <string name="recipe_name">Nutella Pie</string>
     <string name="next_step">Next Step</string>
     <string name="previous_step">Previous Step</string>
+    <string name="ingredient_description">Ingredient Description</string>
+    <string name="ingredient_quantity">Quantity</string>
+    <string name="ingredient_measure">Measure</string>
     <string name="step_description">Step description</string>
     <string name="no_content_description">No Content</string>
     <string name="no_content_title">Let Cook!</string>

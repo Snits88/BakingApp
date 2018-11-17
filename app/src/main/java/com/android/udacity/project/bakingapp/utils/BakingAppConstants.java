@@ -4,7 +4,7 @@ public interface BakingAppConstants {
 
     String RECIPE = "recipe";
 
-    String STEP= "Step";
+    String STEP = "Step";
 
     String RECIPE_LIST = "recipe_list";
 
@@ -19,6 +19,10 @@ public interface BakingAppConstants {
     String CHEESECAKE = "Cheesecake";
 
     String STEP_N = "Step n° ";
+
+    String QUANTITY = "Quantity: ";
+
+    String MEASURE = "Measure: ";
 
     String TWO_PANE = "twoPane";
 }
