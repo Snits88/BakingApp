@@ -1,0 +1,34 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:padding="@dimen/widget_margin">
+
+    <TextView
+        android:id="@+id/appwidget_ingredients"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:text="@string/ingredients"
+        android:textAlignment="center"
+        android:background="@color/colorPrimaryAlternative"
+        android:textSize="20sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/appwidget_ingredients_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:contentDescription="@string/ingredients_list"
+        android:text="@string/ingredients_list"
+        android:textColor="@color/colorBlack"
+        android:textSize="15sp"
+        android:textAlignment="viewStart"
+        android:textStyle="italic" />
+
+</LinearLayout>
+

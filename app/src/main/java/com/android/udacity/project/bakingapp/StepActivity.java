@@ -1,5 +1,7 @@
 package com.android.udacity.project.bakingapp;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +17,7 @@ import com.android.udacity.project.bakingapp.fragment.RecipeStepFragment;
 import com.android.udacity.project.bakingapp.model.Recipe;
 import com.android.udacity.project.bakingapp.model.Step;
 import com.android.udacity.project.bakingapp.utils.BakingAppConstants;
+import com.android.udacity.project.bakingapp.widget.RecipeIngredientsWidget;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 
@@ -43,6 +46,7 @@ public class StepActivity extends AppCompatActivity {
             }
         }
     }
+
 
     private void startStepFragment(){
         RecipeStepFragment fragment = new RecipeStepFragment();

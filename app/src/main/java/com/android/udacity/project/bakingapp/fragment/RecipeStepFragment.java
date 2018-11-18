@@ -164,9 +164,6 @@ public class RecipeStepFragment extends Fragment {
                 pBtnStep.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
-                        if(videoPlay){
-                            player.release();
-                        }
                         RecipeStepFragment nextFragment = new RecipeStepFragment();
                         Bundle bundle = new Bundle();
                         bundle.putParcelable(BakingAppConstants.RECIPE, recipe);
@@ -184,9 +181,6 @@ public class RecipeStepFragment extends Fragment {
                 nBtnStep.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
-                        if(videoPlay){
-                            player.release();
-                        }
                         RecipeStepFragment nextFragment = new RecipeStepFragment();
                         Bundle bundle = new Bundle();
                         bundle.putParcelable(BakingAppConstants.RECIPE, recipe);

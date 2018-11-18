@@ -1,5 +1,7 @@
 package com.android.udacity.project.bakingapp;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -21,6 +23,7 @@ import com.android.udacity.project.bakingapp.adapter.RecipeListAdapter;
 import com.android.udacity.project.bakingapp.model.Recipe;
 import com.android.udacity.project.bakingapp.utils.BakingAppConstants;
 import com.android.udacity.project.bakingapp.utils.JSONRecipesDownloader;
+import com.android.udacity.project.bakingapp.widget.RecipeIngredientsWidget;
 
 import org.w3c.dom.Text;
 
@@ -56,21 +59,18 @@ public class MainActivity extends AppCompatActivity implements RecipeListAdapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         rlAdapter = new RecipeListAdapter(this);
-
         imageFailure.setVisibility(View.GONE);
         cardViewError.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, 2);
+            recyclerView.setLayoutManager(gridLayoutManager);
         } else {
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
             recyclerView.setLayoutManager(layoutManager);
         }
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(rlAdapter);
         //Json Load with Recipes
@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements RecipeListAdapter
         }else{
             failedLoad();
         }
-
     }
 
     @Override
@@ -89,7 +88,26 @@ public class MainActivity extends AppCompatActivity implements RecipeListAdapter
         Intent intent = new Intent(MainActivity.this, RecipeInfoActivity.class);
         intent.putExtra(BakingAppConstants.RECIPE, recipe);
         startActivity(intent);
+        // Update Application Widget
+        updateWidgets(recipe);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Update Application Widget
+        updateWidgets(null);
+    }
+
+    private void updateWidgets(Recipe recipe) {
+        if(recipe != null){
+            RecipeIngredientsWidget.addRecipeToWidget(recipe);
+        }else{
+            RecipeIngredientsWidget.removeRecipeFromWidget();
+        }
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, RecipeIngredientsWidget.class));
+        RecipeIngredientsWidget.updateAllAppWidget(this, appWidgetManager, appWidgetIds);
     }
 
     @Override

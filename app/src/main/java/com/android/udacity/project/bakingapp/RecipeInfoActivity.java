@@ -1,9 +1,12 @@
 package com.android.udacity.project.bakingapp;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +19,7 @@ import com.android.udacity.project.bakingapp.fragment.RecipeStepFragment;
 import com.android.udacity.project.bakingapp.model.Recipe;
 import com.android.udacity.project.bakingapp.model.Step;
 import com.android.udacity.project.bakingapp.utils.BakingAppConstants;
+import com.android.udacity.project.bakingapp.widget.RecipeIngredientsWidget;
 
 import java.util.ArrayList;
 import java.util.List;
