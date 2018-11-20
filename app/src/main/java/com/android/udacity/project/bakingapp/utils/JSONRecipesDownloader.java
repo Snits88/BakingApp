@@ -2,10 +2,12 @@ package com.android.udacity.project.bakingapp.utils;
 
 import android.content.Context;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 import com.android.udacity.project.bakingapp.MainActivity;
 import com.android.udacity.project.bakingapp.R;
+import com.android.udacity.project.bakingapp.idleresource.BakingAppIdleResource;
 import com.android.udacity.project.bakingapp.model.Recipe;
 
 import java.util.ArrayList;
@@ -25,7 +27,12 @@ public class JSONRecipesDownloader {
         void failedLoad();
     }
 
-    public static void retrieveJson(final Context context, final PopulateRepicesList callback){
+    public static void retrieveJson(final Context context, final PopulateRepicesList callback,
+                                    @Nullable final BakingAppIdleResource idleResource){
+
+        if (idleResource != null) {
+            idleResource.setIdleState(false);
+        }
 
         /*Create handle for the RetrofitInstance interface*/
         Retrofit retrofitInstance = RetrofitClientInstance.getRetrofitInstance();
@@ -37,6 +44,9 @@ public class JSONRecipesDownloader {
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                 recipes = response.body();
                 callback.populate(recipes);
+                if(idleResource != null){
+                    idleResource.setIdleState(true);
+                }
             }
 
             @Override
@@ -46,4 +56,5 @@ public class JSONRecipesDownloader {
             }
         });
     }
+
 }

@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.widget.RemoteViews;
 
 import com.android.udacity.project.bakingapp.MainActivity;
@@ -98,5 +100,6 @@ public class RecipeIngredientsWidget extends AppWidgetProvider {
         }
         return IngredietnsList;
     }
+
 }
 

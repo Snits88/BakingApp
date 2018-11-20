@@ -7,6 +7,10 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -20,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.udacity.project.bakingapp.adapter.RecipeListAdapter;
+import com.android.udacity.project.bakingapp.idleresource.BakingAppIdleResource;
 import com.android.udacity.project.bakingapp.model.Recipe;
 import com.android.udacity.project.bakingapp.utils.BakingAppConstants;
 import com.android.udacity.project.bakingapp.utils.JSONRecipesDownloader;
@@ -54,6 +59,22 @@ public class MainActivity extends AppCompatActivity implements RecipeListAdapter
 
     private List<Recipe> recipes;
 
+    // The Idling Resource which will be null in production.
+    @Nullable
+    private BakingAppIdleResource mIdlingResource;
+
+    /**
+     * Only called from test, creates and returns a new {@link BakingAppIdleResource}.
+     */
+    @VisibleForTesting
+    @NonNull
+    public BakingAppIdleResource getIdlingResource() {
+        if (mIdlingResource == null) {
+            mIdlingResource = new BakingAppIdleResource();
+        }
+        return mIdlingResource;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements RecipeListAdapter
         recyclerView.setAdapter(rlAdapter);
         //Json Load with Recipes
         if(isNetworkAvailable()) {
-            JSONRecipesDownloader.retrieveJson(this, MainActivity.this);
+            JSONRecipesDownloader.retrieveJson(this, MainActivity.this, getIdlingResource());
         }else{
             failedLoad();
         }
